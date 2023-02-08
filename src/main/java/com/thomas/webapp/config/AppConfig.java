@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({WebConfig.class, JpaConfig.class})
+@Import({JpaConfig.class, WebConfig.class})
 public class AppConfig {
 
 }
