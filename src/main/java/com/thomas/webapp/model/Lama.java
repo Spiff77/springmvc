@@ -32,4 +32,6 @@ public class Lama {
 	@NonNull
 	private String name;
 	
+	
+	
 }

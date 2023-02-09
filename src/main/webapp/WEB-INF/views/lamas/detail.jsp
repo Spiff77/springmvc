@@ -9,9 +9,10 @@
 <title>Welcome</title>
 </head>
 <body> 
-	<h1>Welcome to my webpage</h1>
-	<p> You are logged as ${nom}</p>
-	<p>Your color is: ${color}</p>
-	<p>Your music is: ${music}</p>
+	<h1>Detail d'un lama</h1>
+	<ul>
+		<li>ID: ${lama.id}</li>
+		<li>Name: ${lama.name}</li>
+	</ul>
 </body>
 </html>

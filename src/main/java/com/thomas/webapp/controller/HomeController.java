@@ -1,11 +1,13 @@
 package com.thomas.webapp.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,20 +28,36 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/init")
-	public String init() {
+	@GetMapping("/{nom}/{lastname}")
+	public String displayName(
+			@PathVariable("nom") String lastname,
+			@PathVariable String firstname,
+			@RequestParam(required = false, defaultValue = "no color") String color, 
+			@RequestParam(required = false, defaultValue = "no music :(") String music, 
+			Model model) {
+		model.addAttribute("nom", firstname + " "+lastname);
+		model.addAttribute("color", color);
+		model.addAttribute("music", music);
+		
+		return "home";
+	}
 
-		return "redirect:/list";
-	}
 	
-	@GetMapping("/list") 
-	public String home(@RequestParam(required = false, defaultValue = "0") Integer init, Model model) {
-		if(init == 1) {
-			ldao.save(new Lama("serge"));
-			ldao.save(new Lama("jacques"));
-		}
-		List<Lama> lamas = ldao.findAll();
-		model.addAttribute("lamas", lamas);
-		return "lamas/list";
-	}
 }
+/**
+ * 
+ * Faire un nouveau controller LamaController
+ * --> /lamas ---> affiche la list de tous les nom de lamas, dispose en plus d'un
+ * 	 				 parametre init pour peupler la base si vide
+ * --> /lamas/{id} ---> Affiche un seul lama avec toutes ses propriétés (id, nom)
+ * 						  (detail.jsp) 
+ * 
+ * Bonus, si id n'existe pas dans la base: Redirect--> /list
+ * 
+ * 
+ * 
+ */
+
+
+
+

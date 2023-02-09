@@ -12,7 +12,8 @@
 	<h1>Liste des Lamas</h1>
 	<ul>
 		<c:forEach items="${lamas}" var="lama">
-		<li>(${lama.id}) ${lama.name}</li>
+			<c:url value="/lamas/${lama.id}" var="lamaUrl"></c:url> 
+			<li><a href="${lamaUrl}">(${lama.id}) ${lama.name}</a></li>
 		</c:forEach>
 	</ul>
 </body>
