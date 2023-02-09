@@ -28,13 +28,16 @@ public class HomeController {
 	
 	@GetMapping("/init")
 	public String init() {
-		ldao.save(new Lama("serge"));
-		ldao.save(new Lama("jacques"));
+
 		return "redirect:/list";
 	}
 	
-	@GetMapping("/list") // si param init=1 alors insertion d'elements dans la base
-	public String home(Model model) {
+	@GetMapping("/list") 
+	public String home(@RequestParam(required = false, defaultValue = "0") Integer init, Model model) {
+		if(init == 1) {
+			ldao.save(new Lama("serge"));
+			ldao.save(new Lama("jacques"));
+		}
 		List<Lama> lamas = ldao.findAll();
 		model.addAttribute("lamas", lamas);
 		return "lamas/list";
